@@ -156,25 +156,12 @@ input_month = input("Enter the month of the year (Jan - Dec): ")
 input_day = int(input("Enter the day of the month: "))
 
 
-seasons = [
-    ("Winter", (12, 21), (3, 19)),
-    ("Spring", (3, 20), (6, 20)),
-    ("Summer", (6, 21), (9, 21)),
-    ("Fall", (9, 22), (12, 20))
-]
-
-for season_name, start_date, end_date in seasons:
-    if (input_month == 'Dec' and (start_date[0] == 12 and input_day >= start_date[1])) or \
-       (input_month == 'Mar' and (start_date[0] == 3 and input_day >= start_date[1])) or \
-       (input_month == 'Jun' and (start_date[0] == 6 and input_day >= start_date[1])) or \
-       (input_month == 'Sep' and (start_date[0] == 9 and input_day >= start_date[1])) or \
-       (input_month == 'Jan' and (start_date[0] == 12 and input_day < start_date[1])) or \
-       (input_month == 'Mar' and (start_date[0] == 3 and input_day < start_date[1])) or \
-       (input_month == 'Jun' and (start_date[0] == 6 and input_day < start_date[1])) or \
-       (input_month == 'Sep' and (start_date[0] == 9 and input_day < start_date[1])):
-        likely_season = season_name
-        break
+if input_month in ('Dec', 'Jan', 'Feb'):
+  season = 'Fall' if input_month == 'Dec' and input_day < 21 else 'Winter'
+elif input_month in ('Mar', 'Apr', 'May'):
+  season = 'Winter' if input_month == 'Mar' and input_day < 20 else 'Spring'
+elif input_month in ('Jun', 'Jul', 'Aug'):
+  season = 'Spring' if input_month == 'Jun' and input_day < 21 else 'Summer'
 else:
-    likely_season = "Not a season"
-
-print(f"{input_month} {input_day} is in {likely_season}")
+  season = 'Summer' if input_month == 'Sep' and input_day < 22 else 'Fall'
+print(f'{input_month} {input_day} is in {season}')
